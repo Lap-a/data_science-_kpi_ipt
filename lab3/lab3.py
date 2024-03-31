@@ -111,9 +111,8 @@ class WebApp(server.App):
 
 
     def getPlot(self, params):
-        plt_obj = self.getTable(params).plot()
-        plt_obj.set_ylabel("set_ylabel")
-        plt_obj.set_title("set_title")
+        indicator = params["indicator"]
+        plt_obj = self.getTable(params).plot(x = "Week", y = indicator)
         fig = plt_obj.get_figure()
         return fig
 
