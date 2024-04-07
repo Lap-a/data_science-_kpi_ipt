@@ -1,3 +1,5 @@
+# suppose that the elements in the list are unique
+
 from tkinter import *
 
 class Node:
@@ -17,11 +19,12 @@ class DoublyLinkedList:
 
     def search(self, key):
         current = self.head
+        result = []
         while current:
             if current.key == key:
-                return current
+                result.append(current)
             current = current.next
-        return False
+        return result
 
     def append(self, key):# at the end
         new_node = Node(key)
@@ -42,18 +45,19 @@ class DoublyLinkedList:
             self.head = new_node
         
     def insert_after(self, key, new_key):
-        current = self.search(key)
-        if current == False:
-            print("No such element")
+        currents = self.search(key)
+        if len(currents) == 0:
+            print ("no such element")
         else:
-            if current.next:
-                new_node = Node(new_key)
-                new_node.prev = current
-                new_node.next = current.next
-                current.next.prev = new_node
-                current.next = new_node
-            else:
-                self.append(new_key)
+            for current in currents:
+                if current.next:
+                    new_node = Node(new_key)
+                    new_node.prev = current
+                    new_node.next = current.next
+                    current.next.prev = new_node
+                    current.next = new_node
+                else:
+                    self.append(new_key)
 
     def print_list(self):
         current = self.head
@@ -64,23 +68,27 @@ class DoublyLinkedList:
         return text
 
     def remove(self, key):
-        current = self.search(key)
-        if current == False:
+        currents = self.search(key)
+        if len(currents) == 0:
             print ("no such element")
         else:
-            if current.prev:
-                current.prev.next = current.next
-            else:
-                self.head = current.next
-            if current.next:
-                current.next.prev = current.prev
+            for current in currents:
+                if current.prev:
+                    current.prev.next = current.next
+                else:
+                    self.head = current.next
+                if current.next:
+                    current.next.prev = current.prev
+
+    
+    def lab_function(self):
+        pass
 
 
 
 llist = DoublyLinkedList()
-llist.append("1")
-llist.append("2")
-llist.append("3")
+for i in "last 12342 hope":
+    llist.append(i)
 
 wind = Tk()
 wind.title("lab3")
