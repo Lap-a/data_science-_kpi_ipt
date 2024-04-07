@@ -9,26 +9,24 @@ class Node:
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
-        #self.tail = None
+        self.tail = None
         #self.current = None
     def empty(self):
         return self.head is None
     
-    def append(self, data):
+    def append(self, data):# at the end
         new_node = Node(data)
         if self.empty():
-            self.head = new_node
+            self.head = self.tail = new_node
         else:
-            current = self.head
-            while current.next:
-                current = current.next
-            current.next = new_node
-            new_node.prev = current
+            new_node.prev = self.tail
+            self.tail.next = new_node
+            self.tail = new_node
 
-    def prepend(self, data):
+    def prepend(self, data):# at the start
         new_node = Node(data)
         if self.empty():
-            self.head = new_node
+            self.head= self.tail = new_node
         else:
             new_node.next = self.head
             self.head.prev = new_node
@@ -38,7 +36,6 @@ class DoublyLinkedList:
         current = self.head
         text = ""
         while current:
-            #print(current.data)
             text += str(current.data) + " "
             current = current.next
         return text
@@ -67,49 +64,49 @@ class DoublyLinkedList:
 
 
 llist = DoublyLinkedList()
-llist.append(1)
-llist.append(2)
-llist.append(3)
+#llist.append("1")
+#llist.append("2")
+#llist.append("3")
 
 wind = Tk()
 wind.title("lab3")
 wind.geometry('350x200')
 
+def app():
+    llist.append(enter2.get())
+
+def prep():
+    llist.prepend(enter2.get())
+
+def rm():
+    llist.remove(enter2.get())
+
+def show():
+    lbl3.configure(text = "your list: " + llist.print_list())
+
 #lbl = Label(wind, text = "enter text"); lbl.grid()
 
 #entry = Entry(wind, width=57); entry.grid(column = 0, row = 1)
 
-lbl2 = Label(wind, text="enter key")
-lbl2.grid(column=0, row=2)
+lbl2 = Label(wind, text="enter key", width=30)
+lbl2.grid()
 
 enter2 = Entry(wind, width=20)
-enter2.grid(column=0, row=3)
-
-def app():
-    llist.append(int(enter2.get()))
-
-def prep():
-    llist.prepend(int(enter2.get()))
-
-def rm():
-    llist.remove(int(enter2.get()))
-
-def update():
-    lbl3.configure(text=llist.print_list())
+enter2.grid(column=0, row=1)
 
 btn = Button(wind, text = "remove", fg = "red", command=rm)
-btn.grid(column=0, row=4)
+btn.grid(column=1, row=0)
 
 btn2 = Button(wind, text = "append", fg = "red", command=app)
-btn2.grid(column=0, row=5)
+btn2.grid(column=1, row=1)
 
 btn3 = Button(wind, text = "prepend", fg = "red", command=prep)
-btn3.grid(column=0, row=6)
+btn3.grid(column=1, row=2)
 
-btn3 = Button(wind, text = "update", fg = "red", command=update)
+btn3 = Button(wind, text = "show", fg = "red", command=show)
 btn3.grid(column=0, row=7)
 
-lbl3 = Label(wind, text=llist.print_list())
+lbl3 = Label(wind, text = "your list: " + llist.print_list())
 lbl3.grid(column=0, row=8)
 
 
