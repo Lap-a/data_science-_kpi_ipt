@@ -97,7 +97,7 @@ llist = DoublyLinkedList()
 
 wind = Tk()
 wind.title("lab3")
-wind.geometry('350x200')
+wind.geometry('350x300')
 
 def app():
     for i in enter2.get():
@@ -119,6 +119,25 @@ def ins():
 
 def lab():
     llist.lab_function()
+
+def lab2():
+    array = list(enter5.get())
+    i = 0
+    while i < len(array):
+        if array[i] in ("1","2","3","4","5","6","7","8","9","0"):
+            array.remove(array[i])
+            i -= 1
+        elif(array[i] == "a"):
+            array.insert(i, "a")
+            i += 1
+        i+=1
+    i = len(array) - 1
+    while i >= 0:
+        if array[i] == ' ':
+            array = array[:i]
+            break
+        i -= 1
+    lbl4.configure(text = ' '.join(array))
 
 lbl2 = Label(wind, text="enter key", width=30)
 lbl2.grid()
@@ -153,5 +172,13 @@ btn4.grid(column=1, row=7)
 enter4 = Entry(wind, width=20)
 enter4.grid(column=1, row=8)
 
+btn5 = Button(wind, text = "do", fg = "red", command=lab2)
+btn5.grid(column=1, row=10)
+
+enter5 = Entry(wind, width=20)
+enter5.grid(column=0, row=10)
+
+lbl4 = Label(wind, text = "with array method")
+lbl4.grid(column=0, row=11)
 
 wind.mainloop()
