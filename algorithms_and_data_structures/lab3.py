@@ -1,5 +1,3 @@
-# suppose that the elements in the list are unique
-
 from tkinter import *
 
 class Node:
