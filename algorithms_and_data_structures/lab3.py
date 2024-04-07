@@ -65,7 +65,7 @@ class DoublyLinkedList:
             current = current.next
         return text
 
-    def remove(self, key):
+    def remove(self, key): #obj not deleted. u just cannot see it
         currents = self.search(key)
         if len(currents) == 0:
             print ("no such element")
@@ -80,23 +80,32 @@ class DoublyLinkedList:
 
     
     def lab_function(self):
-        pass
+        for i in range(10):
+            self.remove(str(i))
+        self.insert_after("a", "a")
+
+        current = self.tail
+        while current: # find last space
+            if current.key == " ":
+                self.tail = current.prev
+                current.prev.next = None
+            current = current.prev
 
 
 
 llist = DoublyLinkedList()
-for i in "last 12342 hope":
-    llist.append(i)
 
 wind = Tk()
 wind.title("lab3")
 wind.geometry('350x200')
 
 def app():
-    llist.append(enter2.get())
+    for i in enter2.get():
+        llist.append(i)
 
 def prep():
-    llist.prepend(enter2.get())
+    for i in enter2.get():
+        llist.append(i)
 
 def rm():
     llist.remove(enter2.get())
@@ -105,7 +114,11 @@ def show():
     lbl3.configure(text = "your list: " + llist.print_list())
 
 def ins():
-    llist.insert_after(enter4.get(), enter3.get())
+    for i in enter3.get()[::-1]:
+        llist.insert_after(enter4.get(), i)
+
+def lab():
+    llist.lab_function()
 
 lbl2 = Label(wind, text="enter key", width=30)
 lbl2.grid()
@@ -122,20 +135,23 @@ btn2.grid(column=1, row=1)
 btn3 = Button(wind, text = "prepend", fg = "red", command=prep)
 btn3.grid(column=1, row=2)
 
+btn4 = Button(wind, text = "lab", fg = "red", command=lab)
+btn4.grid(column=1, row=3)
+
 btn3 = Button(wind, text = "show", fg = "red", command=show)
-btn3.grid(column=0, row=4)
-
-enter3 = Entry(wind, width=20)
-enter3.grid(column=1, row=5)
-
-btn4 = Button(wind, text = "insert after", fg = "red", command=ins)
-btn4.grid(column=1, row=6)
-
-enter4 = Entry(wind, width=20)
-enter4.grid(column=1, row=7)
+btn3.grid(column=0, row=5)
 
 lbl3 = Label(wind, text = "your list: " + llist.print_list())
-lbl3.grid(column=0, row=5)
+lbl3.grid(column=0, row=6)
+
+enter3 = Entry(wind, width=20)
+enter3.grid(column=1, row=6)
+
+btn4 = Button(wind, text = "insert after", fg = "red", command=ins)
+btn4.grid(column=1, row=7)
+
+enter4 = Entry(wind, width=20)
+enter4.grid(column=1, row=8)
 
 
 wind.mainloop()
