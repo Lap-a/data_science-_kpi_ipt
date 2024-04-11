@@ -91,13 +91,22 @@ class DoublyLinkedList:
                 current.prev.next = None
             current = current.prev
 
+    def find_by_index(self, index):
+        current = self.head
+        count = 0
+        while current:
+            if count == index:
+                return current.key
+            count += 1
+            current = current.next
+        return "out_of_range"
 
 
 llist = DoublyLinkedList()
 
 wind = Tk()
 wind.title("lab3")
-wind.geometry('350x300')
+wind.geometry('350x350')
 
 def app():
     for i in enter2.get():
@@ -119,6 +128,10 @@ def ins():
 
 def lab():
     llist.lab_function()
+
+def find():
+    result = llist.find_by_index(int(enter_x.get()))
+    lbl_x.configure(text = "result: " + result)
 
 def lab2():
     array = list(enter5.get())
@@ -157,11 +170,15 @@ btn3.grid(column=1, row=2)
 btn4 = Button(wind, text = "lab", fg = "red", command=lab)
 btn4.grid(column=1, row=3)
 
+#---------------------------------------------------------
+
 btn3 = Button(wind, text = "show", fg = "red", command=show)
 btn3.grid(column=0, row=5)
 
 lbl3 = Label(wind, text = "your list: " + llist.print_list())
 lbl3.grid(column=0, row=6)
+
+#---------------------------------------------------------
 
 enter3 = Entry(wind, width=20)
 enter3.grid(column=1, row=6)
@@ -172,6 +189,8 @@ btn4.grid(column=1, row=7)
 enter4 = Entry(wind, width=20)
 enter4.grid(column=1, row=8)
 
+#---------------------------------------------------------
+
 btn5 = Button(wind, text = "do", fg = "red", command=lab2)
 btn5.grid(column=1, row=10)
 
@@ -180,5 +199,16 @@ enter5.grid(column=0, row=10)
 
 lbl4 = Label(wind, text = "with array method")
 lbl4.grid(column=0, row=11)
+
+#---------------------------------------------------------
+
+enter_x = Entry(wind, width=20)
+enter_x.grid(column=0, row=13)
+
+btn_x = Button(wind, text = "find", fg = "red", command=find)
+btn_x.grid(column=1, row=13)
+
+lbl_x = Label(wind, text = "result: ")
+lbl_x.grid(column=0, row=14)
 
 wind.mainloop()
