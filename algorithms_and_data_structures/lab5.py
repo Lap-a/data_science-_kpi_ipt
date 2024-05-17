@@ -44,7 +44,7 @@ class BinTree:
                 current = current.right
         return None
 
-    def __plot_tree(self, ax, node, x, y, dx):
+    def tree_plot(self, ax, node, x, y, dx):
         if node:
             ax.plot([x], [y], 'o', color='black')
             bbox_props = dict(boxstyle="round,pad=0.3", fc="lightgrey", ec="black", lw=1)
@@ -53,13 +53,13 @@ class BinTree:
 
             if node.left:
                 ax.plot([x, x - dx / 2], [y, y - 15], '-k')
-                self.__plot_tree(ax, node.left, x - dx / 2, y - 15, dx / 2)
+                self.tree_plot(ax, node.left, x - dx / 2, y - 15, dx / 2)
 
             if node.right:
                 ax.plot([x, x + dx / 2], [y, y - 15], '-k')
                 self.__plot_tree(ax, node.right, x + dx / 2, y - 15, dx / 2)
 
-    def visualize(self, title='Tree'):
+    def show_tree(self, title='Tree'):
         if self.root is None:
             print("Tree is empty.")
             return
@@ -130,8 +130,8 @@ with open("data/text.csv", "r") as text:
     print(words)
     for word in words.split():
         tree.add_element(word)
-    tree.visualize()
+    tree.show_tree()
 
 letter_to_delete = input('Enter letter to delete words with: ')
 tree.delete_node_by_letter(letter_to_delete)
-tree.visualize()
+tree.show_tree()
