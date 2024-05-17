@@ -57,7 +57,7 @@ class BinTree:
 
             if node.right:
                 ax.plot([x, x + dx / 2], [y, y - 15], '-k')
-                self.__plot_tree(ax, node.right, x + dx / 2, y - 15, dx / 2)
+                self.tree_plot(ax, node.right, x + dx / 2, y - 15, dx / 2)
 
     def show_tree(self, title='Tree'):
         if self.root is None:
@@ -65,7 +65,7 @@ class BinTree:
             return
 
         fig, ax = plt.subplots()
-        self.__plot_tree(ax, self.root, 0, 0, 100)
+        self.tree_plot(ax, self.root, 0, 0, 100)
         ax.set_aspect('equal')
         ax.axis('off')
         plt.title(title, y=1.2)
